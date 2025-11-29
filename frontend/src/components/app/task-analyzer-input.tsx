@@ -1,10 +1,14 @@
+import { useContext } from "react"
 import { Button } from "../ui/button"
 import { Label } from "../ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select"
+import { TaskContext } from "@/context/TaskContext"
 
 export const TaskAnalayzerInput = () => {
+    const { tasks } = useContext(TaskContext);
+    
     return <div className="flex flex-col w-full my-5">
-        <div className="text-lg font-medium">Tasks added: 3</div>
+        <div className="text-lg font-medium">{`Tasks added: ${tasks.length}`}</div>
         <p className="text-sm text-neutral-500">Select a strategy and analyze</p>
         <div className="my-4 space-y-2">
             <Label className="text-lg font-medium">Prioritization Strategy</Label>

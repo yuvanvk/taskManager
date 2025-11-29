@@ -8,8 +8,8 @@ import { useState } from "react";
 
 export const TaskPrioritizer = () => {
    const [active, setActive] = useState<"single" | "bulk">("single");
+  
 
-   
   return (
     <>
       <Navbar />

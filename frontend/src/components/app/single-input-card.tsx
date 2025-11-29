@@ -1,15 +1,23 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { Card, CardContent } from "../ui/card"
 import { Input } from "../ui/input"
 import { Label } from "../ui/label"
 import { Button } from "../ui/button"
 import { Plus } from "lucide-react"
+import { TaskContext } from "@/context/TaskContext"
 
 export const SingleInputCard = () => {
     const [title, setTitle] = useState("");
     const [date, setDate] = useState("");
     const [estimatedHours, setEstimatedHours] = useState(0);
     const [importance, setImportance] = useState(0);
+
+    const { setTasks } = useContext(TaskContext);
+
+
+    const handleTaskSubmit = () => {
+        setTasks(c => [...c, { id: Math.random(), title, estimatedHours, date, importance}])
+    }
 
     return <Card className="flex-1">
         <CardContent className="space-y-5">
@@ -29,7 +37,7 @@ export const SingleInputCard = () => {
                 <Label htmlFor="importance">Importance (1-10)</Label>
                 <Input id="importance" name="importance" placeholder="6" type="number" onChange={(e) => setImportance(Number(e.target.value))} />
             </div>
-            <Button className="flex-1 w-full bg-blue-600 hover:bg-blue-800"><Plus />Add Task</Button>
+            <Button onClick={handleTaskSubmit} className="flex-1 w-full bg-blue-600 hover:bg-blue-800"><Plus />Add Task</Button>
         </CardContent>
     </Card>
 }
