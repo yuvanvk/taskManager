@@ -1,6 +1,6 @@
 from datetime import datetime
 
-def calculateScore(tasks):
+def calculate_score(tasks):
     if tasks is None:
          return "Please provide tasks inorder to calculate scores"
      
@@ -40,11 +40,13 @@ def get_remaining_days(due_date):
     
     return remaining_days
 
+
 def calculate_due_score(remaining_days):
     if(remaining_days <= 0):
         return 100
     else:
        return max(0, 100 - remaining_days)
+   
    
 def calculate_importance_score(importance):
     return importance * 10
@@ -52,6 +54,7 @@ def calculate_importance_score(importance):
 
 def calculate_estimated_hours_score(hours):
     return max(0, 24 - hours)
+
 
 def calculate_dependency_score(dependencies):
     return len(dependencies) * 50
