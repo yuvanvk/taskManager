@@ -5,7 +5,8 @@ export type Task = {
     title: string,
     date: string,
     estimatedHours: number,
-    importance: number
+    importance: number,
+    score?: number
 }
 
 export type TaskContextType = {

@@ -1,7 +1,7 @@
 import { Moon } from "lucide-react"
 
 export const Navbar = () => {
-    return (<div className="fixed w-full top-0 border-b">
+    return (<div className="fixed w-full top-0 border-b bg-white/10 backdrop-blur-lg">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
             <div className="flex gap-x-2 items-center px-3 py-5">
                 <div className="bg-blue-600 px-2 py-2 rounded-lg">

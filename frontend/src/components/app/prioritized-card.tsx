@@ -1,10 +1,11 @@
+import type { Task } from "@/context/TaskContext"
 import { Card, CardContent } from "../ui/card"
 
-export const PrioritizedCard = () => {
+export const PrioritizedCard = ({ task }: { task: Task}) => {
     return <Card>
         <CardContent>
             <div className="flex items-center justify-between">
-                <div className="text-xl font-medium">Review team</div>
+                <div className="text-xl font-medium">{task.title}</div>
                 <div className="font-bold text-blue-600">7.4 score</div>
             </div>
             <hr />

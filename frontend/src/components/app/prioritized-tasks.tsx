@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useContext } from "react";
 import { PrioritizedCard } from "./prioritized-card";
+import { AnalyzedContext } from "@/context/AnalyzedContext";
+import { TaskContext } from "@/context/TaskContext";
 
 export const PrioritzedTasks = () => {
-  const [analyzed, setAnalyzed] = useState(false);
-  const [tasks, setTasks] = useState(["df", 'ff']);
+
+  const { analyzed } = useContext(AnalyzedContext)
+  const { tasks } = useContext(TaskContext)
 
 
   return (
@@ -73,9 +76,9 @@ export const PrioritzedTasks = () => {
         </div>
 
         <div className="space-y-3">
-            {tasks.map((t, idx) => {
-                return <PrioritizedCard />
-            })}
+              {tasks.map((t, idx) => (
+                 <PrioritizedCard task={t} key={idx}/>
+              ))} 
         </div>
         </div>
 
