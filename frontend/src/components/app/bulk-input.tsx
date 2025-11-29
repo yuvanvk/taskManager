@@ -43,7 +43,7 @@ export const BulkInput = () => {
           className="w-full h-52 px-2 py-1"
         />
 
-        <p className="text-xs text-neutral-400 whitespace-nowrap">
+        <p className="text-xs text-neutral-400 lg:whitespace-nowrap">
           Format: Array of objects with title, dueDate (YYYY-MM-DD), effort
           (1-10), and importance (1-10)
         </p>

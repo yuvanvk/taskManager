@@ -10,7 +10,7 @@ export const PrioritzedTasks = () => {
 
 
   return (
-    <div className="flex-1 pt-28">
+    <div className="w-full lg:flex-1 pt-28">
       <div className="text-lg font-medium">Prioritized Tasks</div>
       <div className="text-sm text-neutral-500">
         Your tasks sorted by priority score

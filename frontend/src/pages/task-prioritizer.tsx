@@ -13,9 +13,9 @@ export const TaskPrioritizer = () => {
   return (
     <>
       <Navbar />
-      <div className="max-w-7xl mx-auto">
-        <div className="flex items-start w-full gap-x-8 my-5">
-          <div className="flex-1">
+      <div className="lg:max-w-7xl mx-auto px-2">
+        <div className="flex flex-col lg:flex-row items-start w-full gap-x-8 my-5">
+          <div className="w-full lg:flex-1">
             <AddTasks setActive={setActive} active={active}/>
             <div>
               {active === "single" ? <SingleInputCard />: <BulkInput />}
