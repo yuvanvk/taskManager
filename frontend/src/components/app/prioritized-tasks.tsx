@@ -69,7 +69,7 @@ export const PrioritzedTasks = () => {
             </svg>
             Analyze Results
           </div>
-          <p className="text-sm text-neutral-500 whitespace-nowrap">
+          <p className="text-sm text-neutral-500 lg:whitespace-nowrap">
             Tasks are sorted from highest to lowest priority. Start with the top
             tasks for maximum productivity.
           </p>
