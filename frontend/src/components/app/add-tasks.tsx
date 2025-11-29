@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { type Dispatch, type SetStateAction } from "react";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 
-export const AddTasks = () => {
-  const [active, setActive] = useState<"single" | "bulk">("single");
+
+export const AddTasks = ({ setActive, active }: { setActive: Dispatch<SetStateAction<"single" | "bulk">>, active: string}) => {
+ 
 
   return (
     <div className="w-full pt-28">
