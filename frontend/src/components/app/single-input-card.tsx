@@ -5,6 +5,7 @@ import { Label } from "../ui/label";
 import { Button } from "../ui/button";
 import { Plus, X } from "lucide-react";
 import { TaskContext } from "@/context/TaskContext";
+import { toast } from "sonner";
 
 export const SingleInputCard = () => {
   const [title, setTitle] = useState("");
@@ -18,8 +19,19 @@ export const SingleInputCard = () => {
   const { setTasks } = useContext(TaskContext);
 
   const handleTaskSubmit = () => {
+    if(!title || !date || !estimatedHours || !id || !importance || !dependencies) {
+      toast.error("Please fill details")
+      return
+    }
     setTasks((c) => [...c, { id, title, estimatedHours, date, importance, dependencies }]);
+    setTitle("")
+    setDate("")
+    setId(0)
+    setDependencies([])
+    setImportance(0)
+    setEstimatedHours(0)
   };
+
 
   const handleAddDependencies = () => {
     setDependencies((c) => [...c, {
@@ -48,6 +60,7 @@ export const SingleInputCard = () => {
             id="id"
             name="id"
             placeholder="task-1"
+            required
           />
         </div>
         <div className="space-y-2">
@@ -57,6 +70,7 @@ export const SingleInputCard = () => {
             id="title"
             name="title"
             placeholder="Enter title"
+            required
           />
         </div>
         <div className="space-y-2">
@@ -67,6 +81,7 @@ export const SingleInputCard = () => {
             name="due-date"
             placeholder="Enter title"
             type="date"
+            required
           />
         </div>
         <div className="space-y-2">
@@ -77,6 +92,7 @@ export const SingleInputCard = () => {
             name="estimate-hours"
             placeholder="3"
             type="number"
+            required
           />
         </div>
         <div className="space-y-2">
@@ -87,6 +103,7 @@ export const SingleInputCard = () => {
             placeholder="6"
             type="number"
             onChange={(e) => setImportance(Number(e.target.value))}
+            required
           />
         </div>
 
