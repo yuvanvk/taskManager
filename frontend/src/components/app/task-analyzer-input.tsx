@@ -18,6 +18,13 @@ export const TaskAnalayzerInput = () => {
   const { setAnalyzed } = useContext(AnalyzedContext);
 
   const handleAnalyze = async () => {
+    const isCircularDependent = hasCircularDependency(tasks);
+
+    if(isCircularDependent) {
+        toast("Circular Dependency found. Check your tasks assigment")
+        return
+    }
+
     const response: AxiosResponse = await axios.post(
       "http://localhost:8000/api/tasks/analyze/",
       {
@@ -42,6 +49,40 @@ export const TaskAnalayzerInput = () => {
       toast.error("Something went wrong");
     }
   };
+
+  const hasCircularDependency = (tasks: any[]) => {
+  
+  const graph: Record<number, number[]> = {};
+
+  tasks.forEach((task) => {
+    const deps = (task.dependencies || []).map((d: any) => Number(d.value));
+    graph[task.id] = deps;
+  });
+
+  const visited = new Set<number>();
+  const recStack = new Set<number>();
+
+  const dfs = (node: number) => {
+    if (recStack.has(node)) return true; 
+    if (visited.has(node)) return false;
+
+    visited.add(node);
+    recStack.add(node);
+
+    for (const dep of graph[node] || []) {
+      if (dfs(dep)) return true;
+    }
+
+    recStack.delete(node);
+    return false;
+  };
+
+  for (const id in graph) {
+    if (dfs(Number(id))) return true;
+  }
+  return false;
+};
+
 
   return (
     <div className="flex flex-col w-full my-5">

@@ -6,7 +6,8 @@ export type Task = {
     date: string,
     estimatedHours: number,
     importance: number,
-    score?: number
+    score?: number,
+    dependencies?: {id: number, value: string}[],
 }
 
 export type TaskContextType = {

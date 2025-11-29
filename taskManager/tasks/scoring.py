@@ -15,8 +15,8 @@ def calculate_score(tasks):
         score += calculate_importance_score(task['importance'])
         score += calculate_estimated_hours_score(task['estimatedHours'])
         
-        # if(len(task['dependencies']) > 0):
-        #     score += calculate_dependency_score(task['dependencies'])
+        if(len(task['dependencies']) > 0):
+            score += calculate_dependency_score(task['dependencies'])
         
         tasks_with_score.append({
            "id": task['id'],

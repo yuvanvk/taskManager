@@ -14,12 +14,12 @@ export const SingleInputCard = () => {
   const [importance, setImportance] = useState(0);
   const [dependencies, setDependencies] = useState<{id: number, value: string}[]>([]);
 
-  console.log(dependencies);
   
-  const { setTasks } = useContext(TaskContext);
+  
+  const { tasks, setTasks } = useContext(TaskContext);
 
   const handleTaskSubmit = () => {
-    setTasks((c) => [...c, { id, title, estimatedHours, date, importance }]);
+    setTasks((c) => [...c, { id, title, estimatedHours, date, importance, dependencies }]);
   };
 
   const handleAddDependencies = () => {
