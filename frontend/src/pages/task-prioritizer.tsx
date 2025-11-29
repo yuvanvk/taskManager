@@ -1,6 +1,7 @@
 import { AddTasks } from "@/components/app/add-tasks";
 import { PrioritzedTasks } from "@/components/app/prioritized-tasks";
 import { SingleInputCard } from "@/components/app/single-input-card";
+import { TaskAnalayzerInput } from "@/components/app/task-analyzer-input";
 import { Navbar } from "@/components/ui/navbar";
 
 export const TaskPrioritizer = () => {
@@ -14,6 +15,7 @@ export const TaskPrioritizer = () => {
             <div>
               <SingleInputCard />
             </div>
+            <TaskAnalayzerInput />
           </div>
           <PrioritzedTasks />
         </div>
