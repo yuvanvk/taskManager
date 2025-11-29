@@ -9,21 +9,25 @@ def calculate_score(tasks):
     for task in tasks:
         
         score = 0
-        remaining_days = get_remaining_days(task['due_date'])
+        remaining_days = get_remaining_days(task['date'])
         
         score += calculate_due_score(remaining_days)
         score += calculate_importance_score(task['importance'])
-        score += calculate_estimated_hours_score(task['estimated_hours'])
+        score += calculate_estimated_hours_score(task['estimatedHours'])
         
-        
-        score += calculate_dependency_score(task['dependencies'])
+        # if(len(task['dependencies']) > 0):
+        #     score += calculate_dependency_score(task['dependencies'])
         
         tasks_with_score.append({
            "id": task['id'],
-           "priorityScore": score
+           "date": task['date'],
+           "title": task['title'],
+           "importance": task['importance'],
+           'estimatedHours': task['estimatedHours'],
+           "score": score
         })
         
-    sorted_tasks = sorted(tasks_with_score, key=lambda x: x['priorityScore'], reverse=True)
+    sorted_tasks = sorted(tasks_with_score, key=lambda x: x['score'], reverse=True)
         
     return sorted_tasks
 
