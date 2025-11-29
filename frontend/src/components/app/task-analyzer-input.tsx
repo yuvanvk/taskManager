@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Button } from "../ui/button";
 import { Label } from "../ui/label";
 import {
@@ -16,6 +16,8 @@ import { AnalyzedContext } from "@/context/AnalyzedContext";
 export const TaskAnalayzerInput = () => {
   const { tasks, setTasks } = useContext(TaskContext); 
   const { setAnalyzed } = useContext(AnalyzedContext);
+  const [selected, setSelected] = useState("");
+
 
   const handleAnalyze = async () => {
     const isCircularDependent = hasCircularDependency(tasks);
@@ -29,6 +31,7 @@ export const TaskAnalayzerInput = () => {
       "http://localhost:8000/api/tasks/analyze/",
       {
         tasks,
+        selected
       }
     );
     if (response.status === 200) {
@@ -90,7 +93,7 @@ export const TaskAnalayzerInput = () => {
       <p className="text-sm text-neutral-500">Select a strategy and analyze</p>
       <div className="my-4 space-y-2">
         <Label className="text-lg font-medium">Prioritization Strategy</Label>
-        <Select>
+        <Select onValueChange={(value) =>setSelected(value)}>
           <SelectTrigger className="w-full">
             <SelectValue placeholder="Select a Strategy" />
           </SelectTrigger>

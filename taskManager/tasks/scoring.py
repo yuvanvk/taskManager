@@ -1,6 +1,6 @@
 from datetime import datetime
 
-def calculate_score(tasks):
+def calculate_score(tasks, criteria):
     if tasks is None:
          return "Please provide tasks inorder to calculate scores"
      
@@ -15,23 +15,34 @@ def calculate_score(tasks):
         score += calculate_importance_score(task['importance'])
         score += calculate_estimated_hours_score(task['estimatedHours'])
         
-        if(len(task['dependencies']) > 0):
-            score += calculate_dependency_score(task['dependencies'])
+        deps = task.get("dependencies", [])
+        if not isinstance(deps, list):
+            deps = [deps]
         
+        if len(deps) > 0:
+            score += calculate_dependency_score(deps)
+       
         tasks_with_score.append({
            "id": task['id'],
            "date": task['date'],
            "title": task['title'],
            "importance": task['importance'],
            'estimatedHours': task['estimatedHours'],
-           "score": score
+           "score": score,
+           "dependencies": deps,
         })
         
-    sorted_tasks = sorted(tasks_with_score, key=lambda x: x['score'], reverse=True)
+    if criteria == "fastest-wins":
+        return sorted(tasks_with_score, key=lambda x: x['estimatedHours'])
+    
+    elif criteria == "deadline-driven":
+        return sorted(tasks_with_score, key=lambda x: datetime.strptime(x['date'], "%Y-%m-%d"))
+    
+    elif criteria == "high-impact":
+        return sorted(tasks_with_score, key=lambda x: len(x['dependencies']), reverse=True)
         
-    return sorted_tasks
+    return sorted(tasks_with_score, key=lambda x: x['score'], reverse=True)
 
-     
 
 def get_remaining_days(due_date):
     if due_date is None:

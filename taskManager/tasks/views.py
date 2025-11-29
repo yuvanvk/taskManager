@@ -6,18 +6,18 @@ from rest_framework import status
 
 from .scoring import calculate_score
 
-# in-memory db
 in_memory_tasks_data = []
  
 class TaskAnalysis(APIView):
     def post(self, request):
         global in_memory_tasks_data
         tasks = request.data.get("tasks")
+        criteria = request.data.get("selected")
         
         if tasks is None:
             return Response("No Tasks provided", status=status.HTTP_204_NO_CONTENT)
         
-        sorted_tasks = calculate_score(tasks)
+        sorted_tasks = calculate_score(tasks, criteria)
         in_memory_tasks_data = sorted_tasks
         print(in_memory_tasks_data)
         return Response("Analyzed Tasks successfully", status=status.HTTP_200_OK)
