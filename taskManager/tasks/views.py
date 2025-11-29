@@ -11,18 +11,21 @@ in_memory_tasks_data = []
  
 class TaskAnalysis(APIView):
     def post(self, request):
+        global in_memory_tasks_data
         tasks = request.data.get("tasks")
         
         if tasks is None:
             return Response("No Tasks provided", status=status.HTTP_204_NO_CONTENT)
         
         sorted_tasks = calculate_score(tasks)
-        in_memory_tasks_data.append(sorted_tasks)
+        in_memory_tasks_data = sorted_tasks
+        print(in_memory_tasks_data)
         return Response("Analyzed Tasks successfully", status=status.HTTP_200_OK)
 
 
 class GetAnalyzedTasks(APIView):
     def get(self, request):
         top_three_tasks = in_memory_tasks_data[:3]
+        print(top_three_tasks)
         return Response(top_three_tasks, status=status.HTTP_200_OK)
 

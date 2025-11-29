@@ -16,7 +16,7 @@ export const PrioritzedTasks = () => {
         Your tasks sorted by priority score
       </div>
 
-      {analyzed && (
+      {!analyzed && (
         <div className="mt-5 w-full h-52 border border-dashed border-neutral-400 rounded-2xl bg-neutral-50 flex items-center justify-center">
           <div className="flex flex-col text-center">
             <svg
@@ -45,7 +45,7 @@ export const PrioritzedTasks = () => {
         </div>
       )}
 
-      {!analyzed && (
+      {analyzed && (
         <div>
             <div className="w-full h-24 flex flex-col bg-blue-600/10 px-4 py-5 rounded-xl border border-blue-200 space-y-2 my-3">
           <div className="flex items-center text-blue-600 gap-x-2">
